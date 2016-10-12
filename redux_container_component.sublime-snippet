@@ -1,0 +1,28 @@
+<snippet>
+  <content><![CDATA[
+import { connect } from 'react-redux'
+import ${1:ComponentName} from '$2'
+
+const mapStateToProps = (state, ownProps) => {
+  return {
+
+  }
+}
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return {
+
+  }
+}
+
+const ${3:ContainerName} = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(Link)
+
+export default ${3:ContainerName}
+]]></content>
+  <tabTrigger>rdxc</tabTrigger>
+  <scope>source.js -(meta)</scope>
+  <description>Redux: container component</description>
+</snippet>
