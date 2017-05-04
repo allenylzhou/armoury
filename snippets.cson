@@ -1,0 +1,77 @@
+# Your snippets
+#
+# Atom snippets allow you to enter a simple prefix in the editor and hit tab to
+# expand the prefix into a larger code block with templated values.
+#
+# You can create a new snippet in this file by typing "snip" and then hitting
+# tab.
+#
+# An example CoffeeScript snippet to expand log to console.log:
+#
+# '.source.coffee':
+#   'Console log':
+#     'prefix': 'log'
+#     'body': 'console.log $1'
+#
+# Each scope (e.g. '.source.coffee' above) can only be declared once.
+#
+# This file uses CoffeeScript Object Notation (CSON).
+# If you are unfamiliar with CSON, you can read more about it in the
+# Atom Flight Manual:
+# http://flight-manual.atom.io/using-atom/sections/basic-customization/#_cson
+'.source.js':
+  'React Component':
+    'prefix': 'react'
+    'body': """
+      // @flow
+      import classNames from 'classnames';
+      import {createStyleSheet} from 'jss-theme-reactor';
+      import _ from 'lodash';
+      import customPropTypes from 'material-ui/utils/customPropTypes';
+      import React, { Component } from 'react';
+
+      const styleSheet = createStyleSheet('${1:ComponentName}', (theme) => ({
+        [theme.breakpoints.up('sm')]: {
+
+        },
+        [theme.breakpoints.up('md')]: {
+
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
+        [theme.breakpoints.up('xl')]: {
+
+        }
+      }));
+
+      type Props = {};
+      type State = {};
+
+      class ${1:ComponentName} extends Component {
+        props: Props;
+        state: State;
+
+        static defaultProps = {
+
+        };
+
+        static contextTypes = {
+          styleManager: customPropTypes.muiRequired
+        };
+
+        constructor(props: Props) {
+          super(props);
+          this.state = {};
+        }
+
+        render() {
+          const classes = this.context.styleManager.render(styleSheet);
+          return <div>
+
+          </div>;
+        }
+      }
+
+      export default ${1:ComponentName};
+    """
