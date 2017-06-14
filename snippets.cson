@@ -25,9 +25,8 @@
     'body': """
       // @flow
       import classNames from 'classnames';
-      import {createStyleSheet} from 'jss-theme-reactor';
       import _ from 'lodash';
-      import customPropTypes from 'material-ui/utils/customPropTypes';
+      import { withStyles, createStyleSheet } from 'material-ui/styles';
       import React, { Component } from 'react';
 
       const styleSheet = createStyleSheet('${1:ComponentName}', (theme) => ({
@@ -45,19 +44,73 @@
         }
       }));
 
-      type Props = {};
+      type Props = {
+        classes: {[string]: string}
+      };
       type State = {};
 
-      class ${1:ComponentName} extends Component {
-        props: Props;
+      class ${1:ComponentName} extends Component<void, Props, State> {
+        //https://github.com/facebook/flow/issues/1594
         state: State;
 
         static defaultProps = {
 
         };
 
-        static contextTypes = {
-          styleManager: customPropTypes.muiRequired
+        constructor(props: Props) {
+          super(props);
+          this.state = {};
+        }
+
+        render() {
+          const {
+            classes
+          } = this.props;
+          return <div>
+
+          </div>;
+        }
+      }
+
+      export default withStyles(styleSheet)(${1:ComponentName});
+    """
+  'Redux Container':
+    'prefix': 'redux'
+    'body': """
+      // @flow
+      import classNames from 'classnames';
+      import _ from 'lodash';
+      import { withStyles, createStyleSheet } from 'material-ui/styles';
+      import React, { Component } from 'react';
+      import { connect, bindActionCreators } from 'react-redux';
+      import type { Connector } from 'react-redux';
+
+      const styleSheet = createStyleSheet('${1:ComponentName}', (theme) => ({
+        [theme.breakpoints.up('sm')]: {
+
+        },
+        [theme.breakpoints.up('md')]: {
+
+        },
+        [theme.breakpoints.up('lg')]: {
+
+        },
+        [theme.breakpoints.up('xl')]: {
+
+        }
+      }));
+
+      type Props = {
+        classes: {[string]: string}
+      };
+      type State = {};
+
+      class ${1:ComponentName} extends Component<void, Props, State> {
+        //https://github.com/facebook/flow/issues/1594
+        state: State;
+
+        static defaultProps = {
+
         };
 
         constructor(props: Props) {
@@ -73,5 +126,19 @@
         }
       }
 
-      export default ${1:ComponentName};
+      type OwnProps = {};
+
+      const mapStateToProps = (state, ownProps: OwnProps) => {
+        return {};
+      };
+
+      const mapDispatchToActions = (dispatch, ownProps: OwnProps) => {
+        return bindActionCreators({
+
+        }, dispatch);
+      };
+
+      const connector: Connector<OwnProps, Props> = connect(mapStateToProps, mapDispatchToActions);
+
+      export default withStyles(styleSheet)(connector(${1:ComponentName}));
     """
